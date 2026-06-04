@@ -59,4 +59,20 @@ document.addEventListener('DOMContentLoaded', () => {
       placeholder.placeholder = placeholders[e.target.value] || 'Sua mensagem...';
     });
   }
+
+  // Contact form submission handler
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(contactForm);
+      const nome = formData.get('nome');
+      contactForm.innerHTML = `
+        <div style="text-align: center; padding: 3rem 0;">
+          <h3 style="color: var(--champagne-gold); margin-bottom: 1rem;">Mensagem enviada!</h3>
+          <p>Obrigado, ${nome}. Recebemos sua mensagem e retornaremos em até 24 horas úteis.</p>
+        </div>
+      `;
+    });
+  }
 });

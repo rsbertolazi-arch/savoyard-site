@@ -137,9 +137,15 @@ p {
   justify-content: space-between;
 }
 
+.logo {
+  flex-shrink: 0;
+}
+
 .logo img {
-  height: 40px;
-  width: auto;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .nav-links {
@@ -540,6 +546,14 @@ section {
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 3rem;
   margin-bottom: 4rem;
+}
+
+.footer-brand img {
+  height: 50px !important;
+  width: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1rem;
 }
 
 .footer-brand p {

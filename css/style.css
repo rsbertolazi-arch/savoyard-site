@@ -142,10 +142,8 @@ p {
 }
 
 .logo img {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  object-fit: cover;
+  height: 40px;
+  width: auto;
 }
 
 .nav-links {
@@ -549,10 +547,8 @@ section {
 }
 
 .footer-brand img {
-  height: 50px !important;
-  width: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+  height: 40px !important;
+  width: auto;
   margin-bottom: 1rem;
 }
 

@@ -48,13 +48,13 @@
   <section style="padding-bottom: 2rem;">
     <div class="container">
       <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem;">
-        <a href="#" class="btn btn-dark" style="padding: 0.5rem 1.5rem; font-size: 0.75rem;">Todos</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Gastronomia</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Queijos</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Manteigas</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Hospitalidade</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Cultura da Mesa</a>
-        <a href="#" class="btn btn-outline" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Experiências</a>
+        <a href="#" class="btn btn-dark filter-btn active" data-filter="todos" style="padding: 0.5rem 1.5rem; font-size: 0.75rem;">Todos</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="gastronomia" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Gastronomia</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="queijos" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Queijos</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="manteigas" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Manteigas</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="hospitalidade" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Hospitalidade</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="cultura da mesa" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Cultura da Mesa</a>
+        <a href="#" class="btn btn-outline filter-btn" data-filter="experiências" style="padding: 0.5rem 1.5rem; font-size: 0.75rem; border-color: var(--off-white-dark); color: var(--text-muted);">Experiências</a>
       </div>
     </div>
   </section>
@@ -63,7 +63,7 @@
   <section style="padding-top: 0;">
     <div class="container">
       <div class="grid-3">
-        <article class="blog-card">
+        <article class="blog-card" data-category="manteigas">
           <img src="../images/blog-placeholder-1.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Manteigas</span>
@@ -72,7 +72,7 @@
             <a href="artigos/manteiga-terroir.html" class="read-more">Ler artigo &rarr;</a>
           </div>
         </article>
-        <article class="blog-card">
+        <article class="blog-card" data-category="hospitalidade">
           <img src="../images/blog-placeholder-2.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Hospitalidade</span>
@@ -81,7 +81,7 @@
             <a href="#" class="read-more">Ler artigo &rarr;</a>
           </div>
         </article>
-        <article class="blog-card">
+        <article class="blog-card" data-category="cultura da mesa">
           <img src="../images/blog-placeholder-3.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Cultura da Mesa</span>
@@ -90,7 +90,7 @@
             <a href="artigos/cultura-da-mesa.html" class="read-more">Ler artigo &rarr;</a>
           </div>
         </article>
-        <article class="blog-card">
+        <article class="blog-card" data-category="queijos">
           <img src="../images/blog-placeholder-4.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Queijos</span>
@@ -99,7 +99,7 @@
             <a href="#" class="read-more">Ler artigo &rarr;</a>
           </div>
         </article>
-        <article class="blog-card">
+        <article class="blog-card" data-category="gastronomia">
           <img src="../images/blog-placeholder-5.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Gastronomia</span>
@@ -108,7 +108,7 @@
             <a href="#" class="read-more">Ler artigo &rarr;</a>
           </div>
         </article>
-        <article class="blog-card">
+        <article class="blog-card" data-category="experiências">
           <img src="../images/blog-placeholder-6.jpg" alt="Artigo">
           <div class="blog-card-content">
             <span class="category">Experiências</span>
@@ -168,5 +168,30 @@
   </footer>
 
   <script src="../js/main.js"></script>
+  <script>
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const filter = btn.dataset.filter;
+        document.querySelectorAll('.filter-btn').forEach(b => {
+          b.classList.remove('btn-dark', 'active');
+          b.classList.add('btn-outline');
+          b.style.borderColor = 'var(--off-white-dark)';
+          b.style.color = 'var(--text-muted)';
+        });
+        btn.classList.remove('btn-outline');
+        btn.classList.add('btn-dark', 'active');
+        btn.style.borderColor = '';
+        btn.style.color = '';
+        document.querySelectorAll('.blog-card').forEach(card => {
+          if (filter === 'todos' || card.dataset.category === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>

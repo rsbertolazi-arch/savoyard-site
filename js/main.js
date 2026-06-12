@@ -67,12 +67,27 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const formData = new FormData(contactForm);
       const nome = formData.get('nome');
-      contactForm.innerHTML = `
-        <div style="text-align: center; padding: 3rem 0;">
-          <h3 style="color: var(--champagne-gold); margin-bottom: 1rem;">Mensagem enviada!</h3>
-          <p>Obrigado, ${nome}. Recebemos sua mensagem e retornaremos em até 24 horas úteis.</p>
-        </div>
-      `;
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          contactForm.innerHTML = `
+            <div style="text-align: center; padding: 3rem 0;">
+              <h3 style="color: var(--champagne-gold); margin-bottom: 1rem;">Mensagem enviada!</h3>
+              <p>Obrigado, ${nome}. Recebemos sua mensagem e retornaremos em até 24 horas úteis.</p>
+            </div>
+          `;
+        } else {
+          throw new Error('Erro no envio');
+        }
+      }).catch(() => {
+        if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Enviar mensagem'; }
+        alert('Ocorreu um erro ao enviar. Tente novamente ou entre em contato por WhatsApp.');
+      });
     });
   }
 });

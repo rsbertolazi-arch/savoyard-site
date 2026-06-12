@@ -46,17 +46,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Contact form segmentation
   const subjectSelect = document.getElementById('assunto');
+  const emailRouting = {
+    comercial: 'comercial@savoyard.com.br',
+    imprensa: 'fernandobertolazi@savoyard.com.br',
+    experiencias: 'eventos@savoyard.com.br',
+    parcerias: 'sac@savoyard.com.br'
+  };
   if (subjectSelect) {
     subjectSelect.addEventListener('change', (e) => {
       const placeholder = document.getElementById('mensagemPlaceholder');
-      if (!placeholder) return;
-      const placeholders = {
-        comercial: 'Descreva seu interesse comercial...',
-        imprensa: 'Descreva sua solicitação de imprensa...',
-        experiencias: 'Conte-nos sobre a experiência que deseja...',
-        parcerias: 'Descreva a parceria que propõe...'
-      };
-      placeholder.placeholder = placeholders[e.target.value] || 'Sua mensagem...';
+      if (placeholder) {
+        const placeholders = {
+          comercial: 'Descreva seu interesse comercial...',
+          imprensa: 'Descreva sua solicitação de imprensa...',
+          experiencias: 'Conte-nos sobre a experiência que deseja...',
+          parcerias: 'Descreva a parceria que propõe...'
+        };
+        placeholder.placeholder = placeholders[e.target.value] || 'Sua mensagem...';
+      }
+      const form = document.getElementById('contactForm');
+      if (form && emailRouting[e.target.value]) {
+        form.action = 'https://formsubmit.co/' + emailRouting[e.target.value];
+      }
     });
   }
 
@@ -67,9 +78,12 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const formData = new FormData(contactForm);
       const nome = formData.get('nome');
+      const assunto = formData.get('assunto');
+      const targetEmail = emailRouting[assunto] || 'sac@savoyard.com.br';
+      const actionUrl = 'https://formsubmit.co/' + targetEmail;
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Enviando...'; }
-      fetch(contactForm.action, {
+      fetch(actionUrl, {
         method: 'POST',
         body: formData,
         headers: { 'Accept': 'application/json' }

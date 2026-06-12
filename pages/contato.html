@@ -51,7 +51,11 @@
         <div>
           <p class="subtitle">Envie sua mensagem</p>
           <h2 style="margin-bottom: 2rem;">Como podemos ajudar?</h2>
-          <form action="https://formspree.io/f/rsbgestao@gmail.com" method="POST" id="contactForm">
+          <form action="https://formsubmit.co/rsbgestao@gmail.com" method="POST" id="contactForm">
+            <input type="hidden" name="_subject" value="Nova mensagem do site Savoyard">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
             <div class="form-group">
               <label for="nome">Nome completo</label>
               <input type="text" id="nome" name="nome" required>
